@@ -3,7 +3,7 @@
  * Programador: Fernanda Esquivel (esq21542@uvg.edu.gt).
  * Lenguaje: Java
  * Recursos: Visual Studio Code
- * Historial: Finalizado el xx.09.2021
+ * Historial: Finalizado el 14.09.2021
  			  Modificado el xx.09.2021 */
 
 public class Programa 
