@@ -49,7 +49,8 @@ public class Memoria
     {
         //validación
         try 
-        {     
+        {    
+            programas.clear(); //limpiar arraylist de seleccionados (los programas se reemplazan) 
             Scanner lector = new Scanner(archivo); //leer archivo
             while (lector.hasNextLine()) //analizar archivo linea poe linea
             {
@@ -63,8 +64,7 @@ public class Memoria
         } 
         catch (FileNotFoundException e) 
         {
-            System.out.println("Error");
-            e.printStackTrace();
+            System.out.println("Error de lectura del archivo");
         }
     }
 
@@ -151,19 +151,20 @@ public class Memoria
 
     public int[] getPosicion(String name) //EVALUAR SI EL TAMAÑO ES 0 = NO EXISTE EL PROGRAMA
     {
-        int p = 0; //posicion del programa
+        int p = -1; //posicion del programa
         int c = 0; //contador de bloques
         int[] posi = new int[2]; //array con bloque inicial y bloque final
+
         for (int i = 0; i < ejecucion.size(); i++) //Recorrer array ejecucion
         {
-            if (ejecucion.get(i).getNombre().equals(name)) //buscar el programa
+            if ((ejecucion.get(i).getNombre()).equals(name)) //buscar el programa
             {
                 p = i; //guardar su posicion
             }
         }
-        if (p == 0) //si no se encuentra el programa
+        if (p == -1) //si no se encuentra el programa
         {
-            return posi; //vector vacio
+            return null; //vector vacio
         }
         else //sí si se encuentra el programa
         {

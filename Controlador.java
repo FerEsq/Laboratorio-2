@@ -13,6 +13,9 @@ import java.io.IOException;
 import java.security.PublicKey;
 import java.io.FileNotFoundException;  
 import java.util.ArrayList;  
+import java.lang.NullPointerException;
+import java.util.InputMismatchException;
+import java.lang.NumberFormatException;
 
 //Clase Controlador
 class Controlador
@@ -24,61 +27,112 @@ class Controlador
 	{
         int opcion = 0;
         Vista vista = new Vista();
-
-		Memoria RAM = new Memoria("DDR");
-        /*String cad = "2,4,6";
-        String[] pos;
-        pos = cad.split(",");*/
-
-        //RAM.leerArchivo();
-        //RAM.ingresarProgramas(pos);
+		Memoria RAM = null;
         
-		//Mensajes de bienvenida	
-		vista.mostrarInicio();	
-
-        vista.mostrarProgramas(RAM.getProgramas());
+		//Mensajes de bienvenida
+        vista.mostrarInicio();	
 				
-		/*while (opcion != 11)
+		while (opcion != 11)
 		{
-			//Menú		
-			opcion = vista.mostrarMenu();
+			//Menú        	
+            try  
+            {  
+                opcion = vista.mostrarMenu();
 
-			if (opcion == 1) //ingresar vehículo
-			{
-				int h = vista.pedirHoras();
-				String p = vista.pedirPlaca();
-				String ma = vista.pedirMarca();
-				int mo = vista.pedirModelo();
-				Vehiculo v = new Vehiculo(p, ma, mo, h);
-				est.ingresarVehiculo(v);
-				
-			}
+                if (opcion == 1) //inicializar simulador (crear RAM)
+                {
+                    String type = vista.pedirTipo();
+                    if (type.equals("SDR"))
+                    {
+                        int size = vista.pedirTamanio();
+                        RAM = new Memoria(type, size);
+                    }
+                    else if (type.equals("DDR"))
+                    {
+                        RAM = new Memoria(type);
+                    }			
+                }
 
-			if (opcion == 2) //retirar vehículo
-			{
-				String p1 = vista.pedirPlaca();
-				est.retirarVehiculo(p1);
-				
-			}
+                if (opcion == 2) //ingresar programas
+                {
+                    try
+                    {
+                        vista.mostrarProgramas(RAM.getProgramas());
+                        String cadena = vista.pedirProgramas();
+                        String[] select = cadena.split(",");
+                        try
+                        {
+                            RAM.ingresarProgramas(select);
+                        }
+                        catch (NumberFormatException e)
+                        {
+                            System.out.println("Ingrese los programas en el formato indicado. Porfavor inténtelo de nuevo. \n");
+                        }
+                        
+                    }
+                    catch (NullPointerException e)
+                    {
+                        System.out.println("Primero debe inicializar el simulador. Porfavor inténtelo de nuevo. \n");
+                    }
+                }
 
-			if (opcion == 3) //mostrar estadísticas
-			{
-				vista.mostrarStats(est.getPromedio(), est.getUtilizado(), est.getLleno(), est.getCaracteristica());
-			}
+                if (opcion == 3) //RAM total
+                {
+                    vista.mostrarTotal(RAM.getTotal());
+                }
 
-			if (opcion == 11) //salir
-			
-			{
-				vista.mostrarDespedida();
-			}
+                if (opcion == 4) //RAM disponible
+                {
+                    vista.mostrarDisponible(RAM.getDisponible());
+                }
 
-			//Otra ocpión
-			if (opcion > 11)
-			{
-				System.out.println("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-				System.out.println("Esa opción no existe, intente de nuevo");
-				System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
-			}
-		}*/
+                if (opcion == 5) //RAM en uso
+                {
+                    vista.mostrarUso(RAM.getUso());
+                }
+
+                if (opcion == 6) //programas en ejecución
+                {
+                    vista.mostrarEjecucion(RAM.getEjecucion());
+                }
+
+                if (opcion == 7) //programas en cola
+                {
+                    vista.mostrarCola(RAM.getCola());
+                }
+
+                if (opcion == 8) //posición de un programa
+                {
+                    String name = vista.pedirPrograma();
+                    vista.mostrarPosicion(RAM.getPosicion(name));
+                }
+
+                if (opcion == 9) //estado de la memoria
+                {
+                    vista.mostrarEstado(RAM.getEstado());
+                }
+
+                if (opcion == 10) //ciclo de reloj
+                {
+                    System.out.println("Seguimos trabajando en ello ;)");
+                }
+
+                if (opcion == 11) //salir
+                {
+                    vista.mostrarDespedida();
+                }
+
+                //Otra ocpión
+                if (opcion > 11)
+                {
+                    vista.mostrarOpcion();
+                }
+            }
+            catch (InputMismatchException e)
+            {
+                vista.mostrarError();
+                break;
+            }
+		}
 	}
 }

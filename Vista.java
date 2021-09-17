@@ -3,7 +3,7 @@
  * Programador: Fernanda Esquivel (esq21542@uvg.edu.gt).
  * Lenguaje: Java
  * Recursos: Visual Studio Code
- * Historial: Finalizado el xx.09.2021
+ * Historial: Finalizado el 16.09.2021
  			  Modificado el xx.09.2021 */
 
 //Import
@@ -34,7 +34,7 @@ public class Vista
     public int mostrarMenu()
     {
         int op = 0;
-        System.out.println("¿Que opción desea ejecutar? (ingrese solo el número)");	
+        System.out.println("\n¿Que opción desea ejecutar? (ingrese solo el número)");	
 		System.out.println("1. Inicializar simulador");
 		System.out.println("2. Ingresar programas");
 		System.out.println("3. Ver cantidad de memoria total");
@@ -46,7 +46,6 @@ public class Vista
         System.out.println("9. Ver estado de la memoria");
         System.out.println("10. Realizar un ciclo de reloj");
 		System.out.println("11. Salir");
-
         op = scan.nextInt();
         return op;
     }
@@ -134,12 +133,12 @@ public class Vista
         }
         else
         {
-            System.out.println("\n~~~~~~~~~~~~~~~");
+            System.out.println("\n~~~~~~~~~~~~~~~~~~~~");
             for (int i = 0; i < c.length; i++)
             {
                 System.out.println(c[i]);
             }
-            System.out.println("~~~~~~~~~~~~~~~");
+            System.out.println("~~~~~~~~~~~~~~~~~~~~");
         }
     }
 
@@ -152,7 +151,7 @@ public class Vista
 
     public void mostrarPosicion(int[] p)
     {
-        if (p.length == 0)
+        if (p == null)
         {
             System.out.println("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
             System.out.println("El programa no se encuentra en ejecución");
@@ -172,6 +171,27 @@ public class Vista
         System.out.println("- Bloques en uso " + e[0]);
         System.out.println("- Bloques vacíos " + e[1]);
         System.out.println("~~~~~~~~~~~~~~~~~~~~~");
+    }
+
+    public void mostrarCiclo()
+    {
+        System.out.println("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+        System.out.println("Ciclo de reloj realizado con éxito");
+        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+    }
+
+    public void mostrarOpcion()
+    {
+        System.out.println("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+		System.out.println("Esa opción no existe, intente de nuevo");
+		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
+    }
+
+    public void mostrarError()
+    {
+        System.out.println("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+		System.out.println("Esa opción no existe, vuelva a correr el programa");
+		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
     }
 
     //Mensaje de despedida
