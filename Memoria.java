@@ -45,12 +45,11 @@ public class Memoria
         contador = bloques;
     }
 
-    public void leerArchivo()
+    private void leerArchivo()
     {
         //validación
         try 
-        {   
-            //int c = 0;     
+        {     
             Scanner lector = new Scanner(archivo); //leer archivo
             while (lector.hasNextLine()) //analizar archivo linea poe linea
             {
@@ -58,14 +57,9 @@ public class Memoria
                 
                  //convertir datos del archivo a objetos de clase Programa
                 Programa p = new Programa(datos[0], Integer.parseInt(datos[1]), Integer.parseInt(datos[2]));
-
                 programas.add(p);
-
-                 /*System.out.println(c + ": " + programas.get(c).getBloques());
-                 c++;*/
             }
             lector.close(); //cerrar archivo
- 
         } 
         catch (FileNotFoundException e) 
         {
@@ -74,7 +68,7 @@ public class Memoria
         }
     }
 
-    public ArrayList getProgramas()
+    public ArrayList getProgramas() //obtener programas instalados
     {
         leerArchivo();
         return programas;

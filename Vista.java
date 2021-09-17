@@ -26,7 +26,7 @@ public class Vista
         System.out.println("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 		System.out.println("          ✦ Bienvenid@ al simulador de memorias RAM ✦ \n");
 		System.out.println(" - Por el momento, solo contamos con 2 tipos de memoria (SDR/DDR)");
-        System.out.println(" - Recuerde que el tamaño inicial de una memoria DDR es de 4 GB");
+        System.out.println(" - Recuerde darle doble enter al ingresar un dato (de ser necesario)");
 		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
     }
     
@@ -54,74 +54,124 @@ public class Vista
     //Mostrar programas instalados (archivo)
     public void mostrarProgramas(ArrayList<Programa> prgs)
     {
+        System.out.println("\n~~~~~~~~~~~~~~~");
         for (int i = 0; i < prgs.size(); i++)
         {
             System.out.println(i + ": " + prgs.get(i).getNombre());
         }
-
+        System.out.println("~~~~~~~~~~~~~~~");
     }
 
     // ------------------------------ Solicitar datos ------------------------------
 
-
-
-
-
-
-
-    /** 
-     * @return int
-     */
-    public int pedirHoras() 
+    public String pedirProgramas()
     {
-        System.out.println("\nIngrese las horas que ha estado el vehículo en el parqueo:");
-        return scan.nextInt();
-    }
-    
-    /** 
-     * @return String
-     */
-    public String pedirPlaca()
-    {
-        System.out.println("\nIngrese la placa del vehículo:");
+        System.out.println("\nIngrese los números de los programas separados por una coma (n,n,n...):");
         scan.nextLine();
         return scan.nextLine();
     }
-    
-    /** 
-     * @return String
-     */
-    public String pedirMarca()
+
+    public String pedirTipo()
     {
-        System.out.println("\nIngrese la marca del vehículo:");
-        return scan.nextLine();
+        System.out.println("\nIngrese el tipo de memoria RAM en mayúsculas (SDR/DDR):");
+        scan.nextLine();
+        return scan.nextLine().toUpperCase();
     }
-    
-    /** 
-     * @return int
-     */
-    public int pedirModelo()
+
+    public int pedirTamanio()
     {
-        System.out.println("\nIngrese el modelo del vehículo:");
+        System.out.println("\nIngrese el tamaño de la memoria (4/8/12/16/32/64):");
         return scan.nextInt();
     }
 
-    
-    /** 
-     * @param p
-     * @param m
-     * @param r
-     * @param c
-     */
-    //Mostrar las estadísticas
-    public void mostrarStats(Double p, int m, int r, String c)
+    public void mostrarTotal(int t)
     {
-        System.out.println("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-        System.out.println(" * El promedio de tiempo de uso del parqueo es de: " + p + " horas");
-        System.out.println(" * El parqueo que más se utiliza es el número: " + m);
-        System.out.println(" * Cuando el parqueo está lleno, se rechazan: " + r + " vehículos");
-        System.out.println(" * Los parqueos más utilizados son de tamaño: " + c);
-        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
+        System.out.println("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+        System.out.println("La cantidad de memoria RAM total es: " + t + " MB");
+        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+    }
+
+    public void mostrarDisponible(int d)
+    {
+        System.out.println("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+        System.out.println("La cantidad de memoria RAM disponible es: " + d + " MB");
+        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+    }
+
+    public void mostrarUso(int u)
+    {
+        System.out.println("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+        System.out.println("La cantidad de memoria RAM en uso es: " + u + " MB");
+        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+    }
+
+    public void mostrarEjecucion(String[] e)
+    {
+        if (e.length == 0)
+        {
+            System.out.println("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+            System.out.println("No hay ningún programa en ejecución");
+            System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+        }
+        else
+        {
+            System.out.println("\n~~~~~~~~~~~~~~~");
+            for (int i = 0; i < e.length; i++)
+            {
+                System.out.println(e[i]);
+            }
+            System.out.println("~~~~~~~~~~~~~~~");
+        }
+    }
+
+    public void mostrarCola(String[] c)
+    {
+        if (c.length == 0)
+        {
+            System.out.println("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+            System.out.println("No hay ningún programa en la cola");
+            System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+        }
+        else
+        {
+            System.out.println("\n~~~~~~~~~~~~~~~");
+            for (int i = 0; i < c.length; i++)
+            {
+                System.out.println(c[i]);
+            }
+            System.out.println("~~~~~~~~~~~~~~~");
+        }
+    }
+
+    public String pedirPrograma()
+    {
+        System.out.println("\nIngrese el programa en maýusculas y con sus respectivos espacios:");
+        scan.nextLine();
+        return scan.nextLine().toUpperCase();
+    }
+
+    public void mostrarPosicion(int[] p)
+    {
+        if (p.length == 0)
+        {
+            System.out.println("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+            System.out.println("El programa no se encuentra en ejecución");
+            System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+        }
+        else
+        {
+            System.out.println("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+            System.out.println("El programa se encuentra del bloque " + p[0] + " al bloque " + p[1]);
+            System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+        }
+    }
+
+    public void mostrarEstado(int[] e)
+    {
+        System.out.println("\n~~~~~~~~~~~~~~~~~~~~~");
+        System.out.println("- Bloques en uso " + e[0]);
+        System.out.println("- Bloques vacíos " + e[1]);
+        System.out.println("~~~~~~~~~~~~~~~~~~~~~");
     }
 
     //Mensaje de despedida
