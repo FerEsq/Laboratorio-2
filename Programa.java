@@ -70,10 +70,10 @@ public class Programa
         ciclos--;
     }
     
+    //Se agregaron tres métodos para el atributo de ejecutado (un getter y dos setters)
     /** 
      * @return boolean
      */
-    //Se agregaron tres métodos para el atributo de ejecutado (un getter y dos setters)
     public boolean getEjecutado() //obtener ejecutado
     {
         return ejecutado;
@@ -88,5 +88,4 @@ public class Programa
     {
         ejecutado = false;
     }
-
 }

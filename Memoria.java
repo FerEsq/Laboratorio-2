@@ -25,7 +25,6 @@ public class Memoria
     private ArrayList <Programa> cola = new ArrayList<Programa>();
     private ArrayList <Programa> select = new ArrayList<Programa>(); //se agrego un array para guardar los programas seleccionados por el usuario
     private ArrayList <Programa> finalizados = new ArrayList<Programa>(); //se agrego un array para mostrar los programas finalizados
-    private String[] datos; //se agrego un array para almacenar los datos de los programas del archivo
     private String tipo;
     private int tamanio;
     private int bloques;
@@ -63,6 +62,7 @@ public class Memoria
 
     private void leerArchivo() 
     {
+        String[] datos;
         //validación
         try 
         {    
