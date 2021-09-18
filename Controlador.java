@@ -4,10 +4,11 @@
  * Lenguaje: Java
  * Recursos: Visual Studio Code
  * Historial: Finalizado el 16.09.2021
- 			  Modificado el xx.09.2021 */
+ 			  Modificado el 17.09.2021 */
 
 //Import
 import java.util.Scanner;
+import javax.lang.model.util.ElementScanner14;
 import java.io.File;  
 import java.io.IOException;
 import java.security.PublicKey;
@@ -32,7 +33,7 @@ class Controlador
 		//Mensajes de bienvenida
         vista.mostrarInicio();	
 				
-		while (opcion != 11)
+		while (opcion != 12)
 		{
 			//Menú        	
             try  
@@ -50,12 +51,15 @@ class Controlador
                     else if (type.equals("DDR"))
                     {
                         RAM = new Memoria(type);
-                    }			
+                    }
+                    else 
+                    {
+                        System.out.println("\nTipo no válido. Porfavor inténtelo de nuevo. \n");
+                    }		
                 }
-
-                if (opcion == 2) //ingresar programas
-                {
-                    try
+                try 
+                { 
+                    if (opcion == 2) //ingresar programas
                     {
                         vista.mostrarProgramas(RAM.getProgramas());
                         String cadena = vista.pedirProgramas();
@@ -66,64 +70,69 @@ class Controlador
                         }
                         catch (NumberFormatException e)
                         {
-                            System.out.println("Ingrese los programas en el formato indicado. Porfavor inténtelo de nuevo. \n");
-                        }
-                        
+                            System.out.println("\nIngrese los programas en el formato indicado. Porfavor inténtelo de nuevo. \n");
+                        }                        
                     }
-                    catch (NullPointerException e)
+
+                    if (opcion == 3) //RAM total
                     {
-                        System.out.println("Primero debe inicializar el simulador. Porfavor inténtelo de nuevo. \n");
+                        vista.mostrarTotal(RAM.getTotal());
+                    }
+
+                    if (opcion == 4) //RAM disponible
+                    {
+                        vista.mostrarDisponible(RAM.getDisponible());
+                    }
+
+                    if (opcion == 5) //RAM en uso
+                    {
+                        vista.mostrarUso(RAM.getUso());
+                    }
+
+                    if (opcion == 6) //programas en ejecución
+                    {
+                        vista.mostrarEjecucion(RAM.getEjecucion());
+                    }
+
+                    if (opcion == 7) //programas en cola
+                    {
+                        vista.mostrarCola(RAM.getCola());
+                    }
+
+                    if (opcion == 8) //posición de un programa
+                    {
+                        String name = vista.pedirPrograma();
+                        vista.mostrarPosicion(RAM.getPosicion(name));
+                    }
+
+                    if (opcion == 9) //estado de la memoria
+                    {
+                        vista.mostrarEstado(RAM.getEstado());
+                    }
+
+                    if (opcion == 10) //ciclo de reloj
+                    {
+                        RAM.makeCiclo();
+                        vista.mostrarCiclo(RAM.getCiclos());
+                    }
+
+                    if (opcion == 11) //mostrar finalizados
+                    {
+                        vista.mostrarFinalizados(RAM.getFinalizados());
+                    }
+
+                    if (opcion == 12) //salir
+                    {
+                        vista.mostrarDespedida();
                     }
                 }
-
-                if (opcion == 3) //RAM total
+                catch (NullPointerException e)
                 {
-                    vista.mostrarTotal(RAM.getTotal());
-                }
-
-                if (opcion == 4) //RAM disponible
-                {
-                    vista.mostrarDisponible(RAM.getDisponible());
-                }
-
-                if (opcion == 5) //RAM en uso
-                {
-                    vista.mostrarUso(RAM.getUso());
-                }
-
-                if (opcion == 6) //programas en ejecución
-                {
-                    vista.mostrarEjecucion(RAM.getEjecucion());
-                }
-
-                if (opcion == 7) //programas en cola
-                {
-                    vista.mostrarCola(RAM.getCola());
-                }
-
-                if (opcion == 8) //posición de un programa
-                {
-                    String name = vista.pedirPrograma();
-                    vista.mostrarPosicion(RAM.getPosicion(name));
-                }
-
-                if (opcion == 9) //estado de la memoria
-                {
-                    vista.mostrarEstado(RAM.getEstado());
-                }
-
-                if (opcion == 10) //ciclo de reloj
-                {
-                    System.out.println("Seguimos trabajando en ello ;)");
-                }
-
-                if (opcion == 11) //salir
-                {
-                    vista.mostrarDespedida();
+                    System.out.println("\nPrimero debe inicializar el simulador. Porfavor inténtelo de nuevo. \n");
                 }
 
                 //Otra ocpión
-                if (opcion > 11)
+                if (opcion > 12)
                 {
                     vista.mostrarOpcion();
                 }

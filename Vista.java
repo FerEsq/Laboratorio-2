@@ -4,7 +4,7 @@
  * Lenguaje: Java
  * Recursos: Visual Studio Code
  * Historial: Finalizado el 16.09.2021
- 			  Modificado el xx.09.2021 */
+ 			  Modificado el 17.09.2021 */
 
 //Import
 import java.util.Scanner;
@@ -23,13 +23,24 @@ public class Vista
     //Mensaje de bienvenida
     public void mostrarInicio()
     {
-        System.out.println("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-		System.out.println("          ✦ Bienvenid@ al simulador de memorias RAM ✦ \n");
+        System.out.println("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+		System.out.println("           ✦ Bienvenid@ al simulador de memorias RAM ✦ \n");
 		System.out.println(" - Por el momento, solo contamos con 2 tipos de memoria (SDR/DDR)");
         System.out.println(" - Recuerde darle doble enter al ingresar un dato (de ser necesario)");
-		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
+		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
     }
-    
+
+    //Mensaje de despedida
+    public void mostrarDespedida()
+    {
+        System.out.println("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+        System.out.println("Muchas gracias por utilizar nuestro simulador!!!");
+        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
+    }
+        
+    /** 
+     * @return int
+     */
     //Menu
     public int mostrarMenu()
     {
@@ -45,11 +56,15 @@ public class Vista
         System.out.println("8. Ver posición de un programa");
         System.out.println("9. Ver estado de la memoria");
         System.out.println("10. Realizar un ciclo de reloj");
-		System.out.println("11. Salir");
+        System.out.println("11. Mostrar programas finalizados");
+		System.out.println("12. Salir");
         op = scan.nextInt();
         return op;
     }
-
+    
+    /** 
+     * @param prgs
+     */
     //Mostrar programas instalados (archivo)
     public void mostrarProgramas(ArrayList<Programa> prgs)
     {
@@ -62,48 +77,71 @@ public class Vista
     }
 
     // ------------------------------ Solicitar datos ------------------------------
-
+    
+    /** 
+     * @return String
+     */
     public String pedirProgramas()
     {
         System.out.println("\nIngrese los números de los programas separados por una coma (n,n,n...):");
         scan.nextLine();
         return scan.nextLine();
     }
-
+    
+    /** 
+     * @return String
+     */
     public String pedirTipo()
     {
         System.out.println("\nIngrese el tipo de memoria RAM en mayúsculas (SDR/DDR):");
         scan.nextLine();
         return scan.nextLine().toUpperCase();
     }
-
+    
+    /** 
+     * @return int
+     */
     public int pedirTamanio()
     {
         System.out.println("\nIngrese el tamaño de la memoria (4/8/12/16/32/64):");
         return scan.nextInt();
     }
 
+    // -------------------------------------------------------------------------
+    
+    /** 
+     * @param t
+     */
     public void mostrarTotal(int t)
     {
         System.out.println("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
         System.out.println("La cantidad de memoria RAM total es: " + t + " MB");
         System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
     }
-
+    
+    /** 
+     * @param d
+     */
     public void mostrarDisponible(int d)
     {
         System.out.println("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
         System.out.println("La cantidad de memoria RAM disponible es: " + d + " MB");
         System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
     }
-
+    
+    /** 
+     * @param u
+     */
     public void mostrarUso(int u)
     {
         System.out.println("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
         System.out.println("La cantidad de memoria RAM en uso es: " + u + " MB");
         System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
     }
-
+    
+    /** 
+     * @param e
+     */
     public void mostrarEjecucion(String[] e)
     {
         if (e.length == 0)
@@ -122,7 +160,10 @@ public class Vista
             System.out.println("~~~~~~~~~~~~~~~");
         }
     }
-
+    
+    /** 
+     * @param c
+     */
     public void mostrarCola(String[] c)
     {
         if (c.length == 0)
@@ -141,14 +182,20 @@ public class Vista
             System.out.println("~~~~~~~~~~~~~~~~~~~~");
         }
     }
-
+    
+    /** 
+     * @return String
+     */
     public String pedirPrograma()
     {
         System.out.println("\nIngrese el programa en maýusculas y con sus respectivos espacios:");
         scan.nextLine();
         return scan.nextLine().toUpperCase();
     }
-
+    
+    /** 
+     * @param p
+     */
     public void mostrarPosicion(int[] p)
     {
         if (p == null)
@@ -164,7 +211,10 @@ public class Vista
             System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
         }
     }
-
+    
+    /** 
+     * @param e
+     */
     public void mostrarEstado(int[] e)
     {
         System.out.println("\n~~~~~~~~~~~~~~~~~~~~~");
@@ -172,34 +222,52 @@ public class Vista
         System.out.println("- Bloques vacíos " + e[1]);
         System.out.println("~~~~~~~~~~~~~~~~~~~~~");
     }
+    
+    /** 
+     * @param c
+     */
+    // ------------------------------ Agregados ------------------------------
 
-    public void mostrarCiclo()
+    public void mostrarCiclo(int c) //mensaje que se muestra al realizar un ciclo
     {
-        System.out.println("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-        System.out.println("Ciclo de reloj realizado con éxito");
-        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+        System.out.println("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+        System.out.println("Ciclo de reloj No." + c + " realizado con éxito");
+        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+    }
+    
+    /** 
+     * @param AL
+     */
+    public void mostrarFinalizados(ArrayList<Programa> AL) //nueva opción: mostrar programas finalizados
+    {
+        if (AL.isEmpty() == true)
+        {
+            System.out.println("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+            System.out.println("No hay ningún programa finalizado");
+            System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+        }
+        else
+        {
+            System.out.println("\n~~~~~~~~~~~~~~~~~~~~");
+            for (int i = 0; i < AL.size(); i++)
+            {
+                System.out.println(AL.get(i).getNombre());
+            }
+            System.out.println("~~~~~~~~~~~~~~~~~~~~");
+        }
     }
 
-    public void mostrarOpcion()
+    public void mostrarOpcion() //Error al ingresar opción no existente
     {
         System.out.println("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 		System.out.println("Esa opción no existe, intente de nuevo");
 		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
     }
 
-    public void mostrarError()
+    public void mostrarError() //Error al ingresar datos incorrectamente
     {
-        System.out.println("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-		System.out.println("Esa opción no existe, vuelva a correr el programa");
-		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+        System.out.println("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+		System.out.println("Error de ingreso de datos, vuelva a correr el programa");
+		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
     }
-
-    //Mensaje de despedida
-    public void mostrarDespedida()
-    {
-        System.out.println("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-        System.out.println("Muchas gracias por utilizar nuestro simulador!!!");
-        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-    }
-    
 }
